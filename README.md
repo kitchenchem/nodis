@@ -7,6 +7,12 @@ This is especially problematic on topics which are broken up into many shorter, 
 
 One shotted by claude. I didn't even look at the code. Use at your own risk, see licence
 
+### To install:
+1. Open `brave://extensions`
+2. Enable "Developer mode"
+3. Click "Load unpacked"
+4. Select the extension folder
+
 ### License
 
 MIT License
