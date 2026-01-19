@@ -1,0 +1,20 @@
+/* YouTube Focus - Hide distracting elements */
+
+/* Recommended videos sidebar (right side of video player) */
+#secondary,
+#related,
+ytd-watch-next-secondary-results-renderer {
+  display: none !important;
+}
+
+/* Comment section */
+#comments,
+ytd-comments {
+  display: none !important;
+}
+
+/* "Up next" autoplay section */
+.ytp-endscreen-content,
+.ytp-ce-element {
+  display: none !important;
+}
