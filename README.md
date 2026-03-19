@@ -1,13 +1,33 @@
 ## Nodis
 
-Nodis (no distraction) is a Brave and Firefox browser extension to block the unecessary parts of youtube.
+Nodis (no distraction) is a Brave and Firefox browser extension to block the unecessary parts of youtube and x.com.
 
 ### Hidden Sections
+
+#### YouTube
 
 - home page algorithm
 - shorts
 - comments
 - suggested video sections
+
+#### X.com
+
+- home feed (For You and Following tabs)
+- sidebar news/trends
+- explore nav link
+
+### Configuration
+
+Before using the extension, open `config.js` and replace `your_username_here` with your X.com username:
+
+```js
+const NODIS_CONFIG = {
+  X_USERNAME: "your_username_here",
+};
+```
+
+This is used for the Lists shortcut on the X.com home page.
 
 ### To install on Brave:
 
