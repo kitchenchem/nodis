@@ -1,0 +1,82 @@
+/* Black out sidebar sections (Explore, More from YouTube, Shorts) */
+.yt-focus-blocked {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hide Shorts everywhere */
+ytd-reel-shelf-renderer,
+ytd-rich-shelf-renderer[is-shorts],
+ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+ytd-video-renderer:has(a[href*="/shorts/"]),
+ytd-grid-video-renderer:has(a[href*="/shorts/"]),
+ytd-compact-video-renderer:has(a[href*="/shorts/"]),
+ytd-rich-item-renderer:has(a[href*="/shorts/"]),
+/* Search results wrappers */
+ytd-shelf-renderer:has(ytd-reel-shelf-renderer),
+ytd-item-section-renderer:has(ytd-reel-shelf-renderer),
+ytd-video-renderer:has([overlay-style="SHORTS"]),
+ytd-video-renderer:has(ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"]),
+/* Catch-all: any element with shorts overlay badge */
+[overlay-style="SHORTS"] {
+  display: none !important;
+}
+
+/* Newer YouTube view-model based Shorts (search results grid shelf) */
+grid-shelf-view-model,
+ytm-shorts-lockup-view-model,
+ytm-shorts-lockup-view-model-v2,
+.shortsLockupViewModelHost {
+  display: none !important;
+}
+
+/* Hide homepage recommendation feed */
+ytd-browse[page-subtype="home"] #primary ytd-rich-grid-renderer,
+ytd-browse[page-subtype="home"] ytd-rich-grid-renderer {
+  display: none !important;
+}
+
+/* Focus navigation overlay */
+#yt-focus-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 120px 40px;
+  min-height: 60vh;
+}
+
+#yt-focus-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 280px;
+  height: 180px;
+  border-radius: 16px;
+  font-size: 28px;
+  font-weight: 700;
+  font-family: "YouTube Sans", "Roboto", Arial, sans-serif;
+  text-decoration: none;
+  color: #0f0f0f;
+  background: #f2f2f2;
+  border: 2px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+#yt-focus-nav a:hover {
+  background: #e5e5e5;
+  border-color: #c00;
+}
+
+/* Dark mode */
+html[dark] #yt-focus-nav a,
+[dark] #yt-focus-nav a {
+  color: #f1f1f1;
+  background: #272727;
+}
+
+html[dark] #yt-focus-nav a:hover,
+[dark] #yt-focus-nav a:hover {
+  background: #3a3a3a;
+  border-color: #c00;
+}

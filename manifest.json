@@ -2,12 +2,18 @@
   "manifest_version": 3,
   "name": "YouTube Focus",
   "version": "1.0",
-  "description": "Block YouTube distractions - hides recommended videos and comments",
+  "description": "Hides YouTube homepage recommendations and replaces them with direct navigation",
+  "icons": {
+    "128": "icons/icon.png"
+  },
+  "permissions": [],
+  "host_permissions": ["*://*.youtube.com/*"],
   "content_scripts": [
     {
-      "matches": ["*://www.youtube.com/*", "*://youtube.com/*"],
-      "css": ["content.css"],
-      "run_at": "document_start"
+      "matches": ["*://*.youtube.com/*"],
+      "css": ["styles.css"],
+      "js": ["content.js"],
+      "run_at": "document_end"
     }
   ]
 }
