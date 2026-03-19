@@ -1,19 +1,23 @@
 ## Nodis
-No distraction is a Brave and Firefox browser extension to block the comment and recommended video sections from displaying when on youtube.
 
-### Why:
-I feel these sections are noise and reduce the likelihood of more meaningful thoughts being formed regarding whatever I just watched. 
-This is especially problematic on topics which are broken up into many shorter, < 20 min, videos. 
+Nodis (no distraction) is a Brave and Firefox browser extension to block the unecessary parts of youtube.
 
-One shotted by claude. I didn't even look at the code. Use at your own risk, see licence
+### Hidden Sections
+
+- home page algorithm
+- shorts
+- comments
+- suggested video sections
 
 ### To install on Brave:
+
 1. Open `brave://extensions`
 2. Enable "Developer mode"
 3. Click "Load unpacked"
 4. Select the extension folder
 
 ### To install on Firefox:
+
 1. Open `about:debugging#/runtime/this-firefox`
 2. Click "Load Temporary Add-on"
 3. Select the `manifest.json` file in the extension folder
