@@ -1,18 +1,24 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Focus",
-  "version": "1.0",
-  "description": "Hides YouTube homepage recommendations and replaces them with direct navigation",
+  "name": "Nodis",
+  "version": "1.1",
+  "description": "Blocks algorithmic feeds on YouTube and X.com",
   "icons": {
     "128": "icons/icon.png"
   },
   "permissions": [],
-  "host_permissions": ["*://*.youtube.com/*"],
+  "host_permissions": ["*://*.youtube.com/*", "*://*.x.com/*", "*://*.twitter.com/*"],
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
-      "css": ["styles.css"],
-      "js": ["content.js"],
+      "css": ["youtube/styles.css"],
+      "js": ["youtube/content.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://*.x.com/*", "*://*.twitter.com/*"],
+      "css": ["x/styles.css"],
+      "js": ["config.js", "x/content.js"],
       "run_at": "document_end"
     }
   ]

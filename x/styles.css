@@ -1,0 +1,38 @@
+/* ===== X.COM / TWITTER — ALGO DEFENSE ===== */
+
+/* --- HOME PAGE: Hide timeline and tabs (scoped via body class set by JS) --- */
+body.nodis-home [data-testid="primaryColumn"] [aria-label="Timeline: Your Home Timeline"],
+body.nodis-home [data-testid="primaryColumn"] [aria-label="Home timeline"],
+body.nodis-home [data-testid="primaryColumn"] [role="tablist"] {
+  display: none !important;
+}
+
+/* --- SIDEBAR: Hide everything except the search box --- */
+[data-testid="news_sidebar"],
+[data-testid*="news_sidebar_article"],
+[data-testid="sidebarColumn"] [aria-label="Timeline: Trending now"],
+[data-testid="sidebarColumn"] section,
+[data-testid="sidebarColumn"] aside,
+[data-testid="trend"],
+[data-testid="sidebarColumn"] [aria-label="Who to follow"],
+[data-testid="sidebarColumn"] [aria-label="Relevant people"] {
+  display: none !important;
+}
+
+/* Keep the search box visible */
+[data-testid="sidebarColumn"] [data-testid="SearchBox_Search_Input"],
+[data-testid="sidebarColumn"] form[role="search"],
+[data-testid="sidebarColumn"] [data-testid="SearchBox_Search_Input_label"] {
+  display: flex !important;
+}
+
+/* --- SEARCH PAGE: Hide algorithmic suggestions --- */
+[data-testid="primaryColumn"] [data-testid="trend"] {
+  display: none !important;
+}
+
+/* --- Hide Explore link in left nav --- */
+a[data-testid="AppTabBar_Explore_Link"],
+a[href="/explore"] {
+  display: none !important;
+}
