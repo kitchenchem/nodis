@@ -145,7 +145,16 @@ function runAll() {
 
 runAll();
 
-const observer = new MutationObserver(runAll);
+let debounceTimer = null;
+const observer = new MutationObserver(() => {
+  if (debounceTimer) return;
+  debounceTimer = setTimeout(() => {
+    debounceTimer = null;
+    observer.disconnect();
+    runAll();
+    observer.observe(document.body, { subtree: true, childList: true });
+  }, 100);
+});
 observer.observe(document.body, { subtree: true, childList: true });
 
 // Content scripts can't intercept the page's pushState calls (isolated world),
