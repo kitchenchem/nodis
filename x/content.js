@@ -4,10 +4,6 @@ function isHomePage() {
   return window.location.pathname === "/" || window.location.pathname === "/home";
 }
 
-function isSearchPage() {
-  return window.location.pathname.startsWith("/search");
-}
-
 // Toggle body class so CSS rules are scoped to home page only
 function updatePageClass() {
   document.body.classList.toggle("nodis-home", isHomePage());
@@ -74,73 +70,8 @@ function blockHomeFeed() {
   }
 }
 
-// Hide everything in the sidebar except the search box
-function blockSidebarNoise() {
-  const sidebar = document.querySelector('[data-testid="sidebarColumn"]');
-  if (!sidebar) return;
-
-  const newsSidebar = sidebar.querySelector('[data-testid="news_sidebar"]');
-  if (newsSidebar) newsSidebar.style.display = "none";
-
-  const sections = sidebar.querySelectorAll("section, aside");
-  for (const s of sections) {
-    s.style.display = "none";
-  }
-
-  const searchForm = sidebar.querySelector('form[role="search"]');
-  if (searchForm) {
-    let sibling = searchForm.closest("div[class]");
-    if (sibling) {
-      sibling = sibling.nextElementSibling;
-      while (sibling) {
-        sibling.style.display = "none";
-        sibling = sibling.nextElementSibling;
-      }
-    }
-  }
-}
-
-// On search page, remove algorithmic suggestions, keep query results
-function cleanSearchResults() {
-  if (!isSearchPage()) return;
-
-  const trends = document.querySelectorAll('[data-testid="primaryColumn"] [data-testid="trend"]');
-  for (const t of trends) {
-    t.style.display = "none";
-  }
-
-  const sidebar = document.querySelector('[data-testid="sidebarColumn"]');
-  if (sidebar) {
-    const sections = sidebar.querySelectorAll("section, aside");
-    for (const section of sections) {
-      const heading = section.querySelector("h2, h3, [role='heading']");
-      if (!heading) continue;
-      const text = heading.textContent.trim().toLowerCase();
-      if (
-        text.includes("who to follow") ||
-        text.includes("you might like") ||
-        text.includes("topics to follow") ||
-        text.includes("relevant people")
-      ) {
-        section.style.display = "none";
-      }
-    }
-  }
-}
-
-// Hide the Explore link from the left navigation
-function hideExploreNav() {
-  const navLinks = document.querySelectorAll('a[data-testid="AppTabBar_Explore_Link"], a[href="/explore"]');
-  for (const link of navLinks) {
-    link.style.display = "none";
-  }
-}
-
 function runAll() {
   blockHomeFeed();
-  blockSidebarNoise();
-  cleanSearchResults();
-  hideExploreNav();
 }
 
 runAll();

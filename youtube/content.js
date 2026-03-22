@@ -80,66 +80,22 @@ function blockMiniSidebarShorts() {
   }
 }
 
-function hideShortsEverywhere() {
-  // Hide Shorts shelf renderers (old style)
-  const shelves = document.querySelectorAll(
-    "ytd-reel-shelf-renderer, ytd-rich-shelf-renderer[is-shorts]"
-  );
-  for (const shelf of shelves) {
-    shelf.style.display = "none";
-    const parentSection = shelf.closest("ytd-item-section-renderer, ytd-shelf-renderer");
-    if (parentSection) parentSection.style.display = "none";
-  }
-
-  // Hide new view-model based Shorts grid shelf (search results)
-  const gridShelves = document.querySelectorAll("grid-shelf-view-model");
-  for (const shelf of gridShelves) {
-    shelf.style.display = "none";
-  }
-
-  // Hide individual Shorts lockup items
-  const shortsLockups = document.querySelectorAll(
-    "ytm-shorts-lockup-view-model, ytm-shorts-lockup-view-model-v2"
-  );
-  for (const lockup of shortsLockups) {
-    lockup.style.display = "none";
-  }
-
-  // Hide any individual video item that links to /shorts/
-  const videoRenderers = document.querySelectorAll(
-    "ytd-video-renderer, ytd-grid-video-renderer, ytd-compact-video-renderer, ytd-rich-item-renderer"
-  );
-  for (const renderer of videoRenderers) {
-    const link = renderer.querySelector('a[href*="/shorts/"]');
-    const badge = renderer.querySelector('[overlay-style="SHORTS"]');
-    if (link || badge) {
-      renderer.style.display = "none";
-    }
-  }
-
-  // Hide anything with the SHORTS overlay badge
-  const shortsBadges = document.querySelectorAll('[overlay-style="SHORTS"]');
-  for (const badge of shortsBadges) {
-    const renderer = badge.closest(
-      "ytd-video-renderer, ytd-grid-video-renderer, ytd-rich-item-renderer, ytd-item-section-renderer, ytd-shelf-renderer"
-    );
-    if (renderer) renderer.style.display = "none";
-  }
-}
-
-// Run on page load and on SPA navigation
-injectNav();
-blockSidebarSections();
-blockMiniSidebarShorts();
-hideShortsEverywhere();
-
-const observer = new MutationObserver(() => {
-  // Always try to inject nav — if we're on homepage and it's missing
-  // (e.g. YouTube rebuilt the DOM), it needs to be re-added
+function runAll() {
   injectNav();
   blockSidebarSections();
   blockMiniSidebarShorts();
-  hideShortsEverywhere();
-});
+}
 
+runAll();
+
+let debounceTimer = null;
+const observer = new MutationObserver(() => {
+  if (debounceTimer) return;
+  debounceTimer = setTimeout(() => {
+    debounceTimer = null;
+    observer.disconnect();
+    runAll();
+    observer.observe(document.body, { subtree: true, childList: true });
+  }, 150);
+});
 observer.observe(document.body, { subtree: true, childList: true });
